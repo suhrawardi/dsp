@@ -15,6 +15,8 @@ from signals.sawtooth_signal import SawtoothSignal
 from signals.square_signal import SquareSignal
 from signals.triangle_signal import TriangleSignal
 
+from signals.sound_wave import SoundWave as Wave
+
 from wav_file_writer import WavFileWriter
 
 
@@ -70,9 +72,8 @@ def main():
         wfile.write(make_note(m, 0.25))
     wfile.close()
 
-    #signal = GlottalSignal(440)
-    #signal.plot()
-    #pyplot.show()
+    signal = GlottalSignal(440)
+    signal.plot()
 
     for sig_cons in [
         SinSignal,
@@ -104,9 +105,8 @@ def main():
     sig5 = CosSignal(freq=987)
     sig = sig1 + sig2 + sig3 + sig4 + sig5
 
-    #wave = Wave(sig, duration=0.02)
-    #wave.plot()
-    #pyplot.show()
+    wave = sig.make_wave(0.02)
+    wave.plot()
 
     wave = sig.make_wave(duration=1)
     wave.normalize()

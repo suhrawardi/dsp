@@ -217,12 +217,18 @@ class SoundWave:
             xfactor = 1
         return xfactor
 
-    #def plot(self, **options):
-    #    xfactor = self.get_xfactor(options)
+    def plot(self, **options):
+        xfactor = self.get_xfactor(options)
+        print("Plotting...!")
+        print(self.ts * xfactor)
+        print(self.ys)
     #    thinkplot.plot(self.ts * xfactor, self.ys, **options)
 
-    #def plot_vlines(self, **options):
-    #    xfactor = self.get_xfactor(options)
+    def plot_vlines(self, **options):
+        xfactor = self.get_xfactor(options)
+        print("Plotting...!")
+        print(self.ts * xfactor)
+        print(self.ys)
     #    thinkplot.vlines(self.ts * xfactor, 0, self.ys, **options)
 
     def corr(self, other):
