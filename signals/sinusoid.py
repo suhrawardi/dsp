@@ -1,10 +1,10 @@
 import math
 import numpy as np
-from signal import Signal
+import signals.base_signal as base_signal
 
 PI2 = math.pi * 2
 
-class Sinusoid(Signal):
+class Sinusoid(base_signal.BaseSignal):
     def __init__(self, freq=440, amp=1.0, offset=0, func=np.sin):
         self.freq = freq
         self.amp = amp

@@ -1,6 +1,6 @@
 import numpy as np
-from spectrum_parent import SpectrumParent
-from sound_wave import SoundWave as Wave
+from signals.spectrum_parent import SpectrumParent
+from signals.sound_wave import SoundWave as Wave
 
 class Spectrum(SpectrumParent):
     def __len__(self):

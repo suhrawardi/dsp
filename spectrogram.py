@@ -1,6 +1,5 @@
 import numpy as np
-import thinkplot
-from sound_wave import SoundWave as Wave
+from signals.sound_wave import SoundWave as Wave
 
 class Spectrogram:
     def __init__(self, spec_map, seg_length):

@@ -1,10 +1,15 @@
+import math
 import numpy as np
-from parabolic_signal import ParabolicSignal
+import signals.sinusoid as sinusoid
 
-class CubicSignal(ParabolicSignal):
+PI2 = math.pi * 2
+
+class TriangleSignal(sinusoid.Sinusoid):
     def evaluate(self, ts):
-        ys = ParabolicSignal.evaluate(self, ts)
-        ys = np.cumsum(ys)
+        ts = np.asarray(ts)
+        cycles = self.freq * ts + self.offset / PI2
+        frac, _ = np.modf(cycles)
+        ys = np.abs(frac - 0.5)
         ys = normalize(unbias(ys), self.amp)
         return ys
 

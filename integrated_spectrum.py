@@ -1,5 +1,4 @@
 import numpy as np
-import thinkplot
 
 class IntegratedSpectrum:
     def __init__(self, cs, fs):

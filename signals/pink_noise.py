@@ -1,13 +1,13 @@
-from noise import Noise
-from uncorrelated_uniform_noise import UncorrelatedUniformNoise
+import signals.noise as noise
+import signals.uncorrelated_uniform_noise as uncorrelated_uniform_noise
 
-class PinkNoise(Noise):
+class PinkNoise(noise.Noise):
     def __init__(self, amp=1.0, beta=1.0):
         self.amp = amp
         self.beta = beta
 
     def make_wave(self, duration=1, start=0, framerate=11025):
-        signal = UncorrelatedUniformNoise()
+        signal = uncorrelated_uniform_noise.UncorrelatedUniformNoise()
         wave = signal.make_wave(duration, start, framerate)
         spectrum = wave.make_spectrum()
 

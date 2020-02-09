@@ -1,7 +1,6 @@
 import copy
 import numpy as np
 import scipy
-import thinkplot
 
 class SpectrumParent:
     def __init__(self, hs, fs, framerate, full=False):

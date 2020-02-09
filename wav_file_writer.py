@@ -1,5 +1,5 @@
 import numpy as np
-from silent_signal import SilentSignal
+from signals.silent_signal import SilentSignal
 from wave import open as open_wave
 
 class WavFileWriter:
@@ -14,7 +14,7 @@ class WavFileWriter:
         self.fmt = "h"
         self.dtype = np.int16
 
-        self.fp = open_wave(self.filename, "w")
+        self.fp = open_wave("wavs/" + self.filename, "w")
         self.fp.setnchannels(self.nchannels)
         self.fp.setsampwidth(self.sampwidth)
         self.fp.setframerate(self.framerate)

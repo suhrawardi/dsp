@@ -1,7 +1,7 @@
 import numpy as np
-from signal import Signal
+import signals.noise as noise
 
-class UncorrelatedUniformNoise(_Noise):
+class UncorrelatedUniformNoise(noise.Noise):
     def evaluate(self, ts):
         ys = np.random.uniform(-self.amp, self.amp, len(ts))
         return ys

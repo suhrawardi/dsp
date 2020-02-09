@@ -1,7 +1,7 @@
 import numpy as np
-from sound_wave import SoundWave as Wave
+import signals.sound_wave as sound_wave
 
-class Signal:
+class BaseSignal:
     def __add__(self, other):
         if other == 0:
             return self
@@ -22,10 +22,10 @@ class Signal:
         n = round(duration * framerate)
         ts = start + np.arange(n) / framerate
         ys = self.evaluate(ts)
-        return Wave(ys, ts, framerate=framerate)
+        return sound_wave.SoundWave(ys, ts, framerate=framerate)
 
 
-class SumSignal(Signal):
+class SumSignal(BaseSignal):
     def __init__(self, *args):
         self.signals = args
 

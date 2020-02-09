@@ -1,7 +1,7 @@
 import numpy as np
-from noise import Noise
+import signals.noise as noise
 
-class UncorrelatedGaussianNoise(Noise):
+class UncorrelatedGaussianNoise(noise.Noise):
     def evaluate(self, ts):
         ys = np.random.normal(0, self.amp, len(ts))
         return ys

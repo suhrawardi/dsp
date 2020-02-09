@@ -1,15 +1,10 @@
-import math
 import numpy as np
-from sinusoid import Sinusoid
+import signals.parabolic_signal as parabolic_signal
 
-PI2 = math.pi * 2
-
-class GlottalSignal(Sinusoid):
+class CubicSignal(parabolic_signal.ParabolicSignal):
     def evaluate(self, ts):
-        ts = np.asarray(ts)
-        cycles = self.freq * ts + self.offset / PI2
-        frac, _ = np.modf(cycles)
-        ys = frac ** 2 * (1 - frac)
+        ys = ParabolicSignal.evaluate(self, ts)
+        ys = np.cumsum(ys)
         ys = normalize(unbias(ys), self.amp)
         return ys
 

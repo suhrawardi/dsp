@@ -1,15 +1,15 @@
 import math
 import numpy as np
-from sinusoid import Sinusoid
+import signals.sinusoid as sinusoid
 
 PI2 = math.pi * 2
 
-class ParabolicSignal(Sinusoid):
+class GlottalSignal(sinusoid.Sinusoid):
     def evaluate(self, ts):
         ts = np.asarray(ts)
         cycles = self.freq * ts + self.offset / PI2
         frac, _ = np.modf(cycles)
-        ys = (frac - 0.5) ** 2
+        ys = frac ** 2 * (1 - frac)
         ys = normalize(unbias(ys), self.amp)
         return ys
 

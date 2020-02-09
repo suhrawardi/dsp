@@ -1,7 +1,7 @@
 import numpy as np
-from signal import Signal
+import signals.base_signal as base_signal
 
-class Impulses(Signal):
+class Impulses(base_signal.BaseSignal):
     def __init__(self, locations, amps=1):
         self.locations = np.asanyarray(locations)
         self.amps = amps

@@ -1,10 +1,10 @@
 import math
 import numpy as np
-from sinusoid import Sinusoid
+import signals.sinusoid as sinusoid
 
 PI2 = math.pi * 2
 
-class ComplexSinusoid(Sinusoid):
+class ComplexSinusoid(sinusoid.Sinusoid):
     def evaluate(self, ts):
         ts = np.asarray(ts)
         phases = PI2 * self.freq * ts + self.offset

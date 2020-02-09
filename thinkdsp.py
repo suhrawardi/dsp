@@ -7,13 +7,14 @@ import numpy as np
 
 import matplotlib.pyplot as pyplot
 
-from cos_signal import CosSignal
-from glottal_signal import GlottalSignal
-from parabolic_signal import ParabolicSignal
-from sawtooth_signal import SawtoothSignal
-from sin_signal import SinSignal
-from square_signal import SquareSignal
-from triangle_signal import TriangleSignal
+from signals.cos_signal import CosSignal
+from signals.sin_signal import SinSignal
+from signals.glottal_signal import GlottalSignal
+from signals.parabolic_signal import ParabolicSignal
+from signals.sawtooth_signal import SawtoothSignal
+from signals.square_signal import SquareSignal
+from signals.triangle_signal import TriangleSignal
+
 from wav_file_writer import WavFileWriter
 
 

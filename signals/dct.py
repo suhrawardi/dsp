@@ -1,7 +1,8 @@
 import scipy
-from sound_wave import SoundWave as Wave
+import signals.spectrum_parent as spectrum_parent
+import signals.sound_wave as sound_wave
 
-class Dct(SpectrumParent):
+class Dct(spectrum_parent.SpectrumParent):
     @property
     def amps(self):
         return self.hs
@@ -19,4 +20,4 @@ class Dct(SpectrumParent):
     def make_wave(self):
         N = len(self.hs)
         ys = scipy.fftpack.idct(self.hs, type=2) / 2 / N
-        return Wave(ys, framerate=self.framerate)
+        return sound_wave.SoundWave(ys, framerate=self.framerate)

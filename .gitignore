@@ -1,2 +1,2 @@
-*.wav
-/__pycache__
+/wavs/*.wav
+__pycache__
