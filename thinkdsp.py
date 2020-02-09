@@ -5,8 +5,6 @@ import random
 
 import numpy as np
 
-import matplotlib.pyplot as pyplot
-
 from signals.cos_signal import CosSignal
 from signals.sin_signal import SinSignal
 from signals.glottal_signal import GlottalSignal
@@ -73,7 +71,7 @@ def main():
     wfile.close()
 
     signal = GlottalSignal(440)
-    signal.plot()
+    signal.plot("glottalsignal")
 
     for sig_cons in [
         SinSignal,
@@ -106,7 +104,7 @@ def main():
     sig = sig1 + sig2 + sig3 + sig4 + sig5
 
     wave = sig.make_wave(0.02)
-    wave.plot()
+    wave.plot("sig5")
 
     wave = sig.make_wave(duration=1)
     wave.normalize()

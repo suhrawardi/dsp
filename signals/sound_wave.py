@@ -2,6 +2,7 @@ import copy
 import numpy as np
 import subprocess
 import warnings
+import plotter
 
 class SoundWave:
     def __init__(self, ys, ts=None, framerate=None):
@@ -217,19 +218,11 @@ class SoundWave:
             xfactor = 1
         return xfactor
 
-    def plot(self, **options):
+    def plot(self, name="sound", **options):
         xfactor = self.get_xfactor(options)
-        print("Plotting...!")
-        print(self.ts * xfactor)
-        print(self.ys)
-    #    thinkplot.plot(self.ts * xfactor, self.ys, **options)
-
-    def plot_vlines(self, **options):
-        xfactor = self.get_xfactor(options)
-        print("Plotting...!")
-        print(self.ts * xfactor)
-        print(self.ys)
-    #    thinkplot.vlines(self.ts * xfactor, 0, self.ys, **options)
+        print("Plotting " + name)
+        p = plotter.Plotter(name, self.ys, self.ts * xfactor)
+        p.plot()
 
     def corr(self, other):
         corr = np.corrcoef(self.ys, other.ys)[0, 1]
@@ -258,15 +251,11 @@ class SoundWave:
 
         return res
 
-    def write(self, filename="sound.wav"):
-        print("Writing", filename)
+    def write(self, filename="sound"):
+        print("Writing " + filename + ".wav")
         wfile = WavFileWriter(filename, self.framerate)
         wfile.write(self)
         wfile.close()
-
-    def play(self, filename="sound.wav"):
-        self.write(filename)
-        play_wave(filename)
 
 
 def normalize(ys, amp=1.0):
@@ -296,11 +285,6 @@ def find_index(x, xs):
     end = xs[-1]
     i = round((n - 1) * (x - start) / (end - start))
     return int(i)
-
-def play_wave(filename="sound.wav", player="aplay"):
-    cmd = "%s %s" % (player, filename)
-    popen = subprocess.Popen(cmd, shell=True)
-    popen.communicate()
 
 def quantize(ys, bound, dtype):
     if max(ys) > 1 or min(ys) < -1:
