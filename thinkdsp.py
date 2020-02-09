@@ -12,15 +12,9 @@ from glottal_signal import GlottalSignal
 from parabolic_signal import ParabolicSignal
 from sawtooth_signal import SawtoothSignal
 from sin_signal import SinSignal
-from sound_wave import SoundWave as Wave
 from square_signal import SquareSignal
 from triangle_signal import TriangleSignal
 from wav_file_writer import WavFileWriter
-
-
-def random_seed(x):
-    random.seed(x)
-    np.random.seed(x)
 
 
 def make_note(midi_num, duration, sig_cons=CosSignal, framerate=11025):
@@ -88,20 +82,17 @@ def main():
         SquareSignal,
     ]:
         wfile = WavFileWriter(sig_cons.__name__ + ".wav")
-        print(sig_cons)
         sig = sig_cons(440)
         wave = sig.make_wave(1)
         wave.apodize()
         wfile.write(wave)
         wfile.close()
-    return
 
-    """
     wave1 = make_note(69, 1)
     wave2 = make_chord([69, 72, 76], 1)
     wave = wave1 | wave2
 
-    wfile = WavFileWriter()
+    wfile = WavFileWriter("wave1_wave2.wav")
     wfile.write(wave)
     wfile.close()
 
@@ -109,19 +100,19 @@ def main():
     sig2 = CosSignal(freq=523.25)
     sig3 = CosSignal(freq=660)
     sig4 = CosSignal(freq=880)
-    _sig5 = CosSignal(freq=987)
-    sig = sig1 + sig2 + sig3 + sig4
+    sig5 = CosSignal(freq=987)
+    sig = sig1 + sig2 + sig3 + sig4 + sig5
 
-    # wave = Wave(sig, duration=0.02)
-    # wave.plot()
+    #wave = Wave(sig, duration=0.02)
+    #wave.plot()
+    #pyplot.show()
 
     wave = sig.make_wave(duration=1)
-    # wave.normalize()
+    wave.normalize()
 
     wfile = WavFileWriter()
     wfile.write(wave)
     wfile.close()
-    """
 
 
 if __name__ == "__main__":

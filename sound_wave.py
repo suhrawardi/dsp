@@ -61,7 +61,7 @@ class SoundWave:
         add_ys(self)
         add_ys(other)
 
-        return Wave(ys, ts, self.framerate)
+        return SoundWave(ys, ts, self.framerate)
 
     __radd__ = __add__
 
@@ -71,7 +71,7 @@ class SoundWave:
 
         ys = np.concatenate((self.ys, other.ys))
         # ts = np.arange(len(ys)) / self.framerate
-        return Wave(ys, framerate=self.framerate)
+        return SoundWave(ys, framerate=self.framerate)
 
     def __mul__(self, other):
         # the spectrums have to have the same framerate and duration
@@ -79,7 +79,7 @@ class SoundWave:
         assert len(self) == len(other)
 
         ys = self.ys * other.ys
-        return Wave(ys, self.ts, self.framerate)
+        return SoundWave(ys, self.ts, self.framerate)
 
     def max_diff(self, other):
         assert self.framerate == other.framerate
@@ -97,17 +97,17 @@ class SoundWave:
 
         ys = np.convolve(self.ys, window, mode="full")
         # ts = np.arange(len(ys)) / self.framerate
-        return Wave(ys, framerate=self.framerate)
+        return SoundWave(ys, framerate=self.framerate)
 
     def diff(self):
         ys = np.diff(self.ys)
         ts = self.ts[1:].copy()
-        return Wave(ys, ts, self.framerate)
+        return SoundWave(ys, ts, self.framerate)
 
     def cumsum(self):
         ys = np.cumsum(self.ys)
         ts = self.ts.copy()
-        return Wave(ys, ts, self.framerate)
+        return SoundWave(ys, ts, self.framerate)
 
     def quantize(self, bound, dtype):
         return quantize(self.ys, bound, dtype)
@@ -165,7 +165,7 @@ class SoundWave:
     def slice(self, i, j):
         ys = self.ys[i:j].copy()
         ts = self.ts[i:j].copy()
-        return Wave(ys, ts, self.framerate)
+        return SoundWave(ys, ts, self.framerate)
 
     def make_spectrum(self, full=False):
         n = len(self.ys)
@@ -262,6 +262,10 @@ class SoundWave:
         self.write(filename)
         play_wave(filename)
 
+
+def normalize(ys, amp=1.0):
+    high, low = abs(max(ys)), abs(min(ys))
+    return amp * ys / max(high, low)
 
 def apodize(ys, framerate, denom=20, duration=0.1):
     # a fixed fraction of the segment
