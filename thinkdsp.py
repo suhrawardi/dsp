@@ -83,6 +83,11 @@ def main():
     ]:
         wfile = WavFileWriter(sig_cons.__name__ + ".wav")
         sig = sig_cons(440)
+
+        wave = sig.make_wave(0.02)
+        wave.apodize()
+        wave.plot(sig_cons.__name__)
+
         wave = sig.make_wave(1)
         wave.apodize()
         wfile.write(wave)

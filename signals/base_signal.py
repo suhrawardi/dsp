@@ -13,10 +13,10 @@ class BaseSignal:
     def period(self):
         return 0.1
 
-    def plot(self, framerate=11025):
+    def plot(self, name="sound", framerate=11025):
         duration = self.period * 3
         wave = self.make_wave(duration, start=0, framerate=framerate)
-        wave.plot()
+        wave.plot(name)
 
     def make_wave(self, duration=1, start=0, framerate=11025):
         n = round(duration * framerate)

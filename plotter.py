@@ -12,6 +12,5 @@ class Plotter:
 
     def plot(self):
         df = pd.DataFrame(self.xs, index=self.ys)
-        ax = df.cumsum().plot(lw=2.0, figsize=(10, 6))
+        ax = df.plot(lw=2.0, figsize=(10, 6))
         ax.figure.savefig("plots/" + self.name + ".pdf")
-
